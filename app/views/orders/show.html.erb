@@ -8,6 +8,29 @@
     <h4>Thank you for your order!</h4>
   </div>
 
+  <div class="display-order">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Product</th>
+          <th scope="col">Product Details</th>
+          <th scope="col">Quantity</th>
+          <th scope="col">Email</th>
+          <th scope="col">Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @order.line_items.each do |line_item| %>
+          <%= render "line_item", line_item: line_item %>
+        <% end %>
+      </tbody>
+      <tfoot>
+        <th colspan="4">Total Price</th>
+        <th><%= humanized_money_with_symbol @order.total_cents / 100.0 %></th>
+      </tfoot>
+    </table>
+  </div>
+
   <%= link_to "Continue Shopping", root_path, class: 'btn btn-lg btn-primary' %>
 
 </section>

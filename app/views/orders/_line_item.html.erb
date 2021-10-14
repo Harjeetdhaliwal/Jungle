@@ -1,0 +1,12 @@
+
+  <tr>
+  <td><%= image_tag line_item.product.image.tiny %></td>
+  <td><%= line_item.product.name %>
+    <br>
+    <br>
+    <%= line_item.product.description %>
+  </td>
+  <td><%= line_item.quantity %></td>
+  <td><%= line_item.order.email %></td>
+  <td><%= humanized_money_with_symbol line_item.total_price %></td>
+  </tr>
