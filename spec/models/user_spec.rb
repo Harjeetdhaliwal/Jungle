@@ -62,4 +62,32 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe '.authenticate_with_credentials' do
+    it 'should authenticate user if email and password is correct' do
+      @user = User.new(name: "Harjeet", last_name: "Kaur", email: "harjeet@mail.com", password: "Test123", password_confirmation: "Test123")
+      @user.save
+      @findUser = User.authenticate_with_credentials("harjeet@mail.com", "Test123")
+      expect(@findUser).to be_present
+    end
+
+    it 'should not authenticate user if email does not exists' do
+      @findUser = User.authenticate_with_credentials("harjeet@mail.com", "Test123")
+      expect(@findUser).to be_nil
+    end
+
+    it 'should authenticate user if email has some capital letters' do
+      @user = User.new(name: "Harjeet", last_name: "Kaur", email: "harjeet@mail.com", password: "Test123", password_confirmation: "Test123")
+      @user.save
+      @findUser = User.authenticate_with_credentials("haRjeEt@mAiL.com", "Test123")
+      expect(@findUser).to be_present
+    end
+
+    it 'should authenticate user if email has extra white spaces' do
+      @user = User.new(name: "Harjeet", last_name: "Kaur", email: "harjeet@mail.com", password: "Test123", password_confirmation: "Test123")
+      @user.save
+      @findUser = User.authenticate_with_credentials("harjeet@mail.com  ", "Test123")
+      expect(@findUser).to be_present
+    end
+  end
+
 end
