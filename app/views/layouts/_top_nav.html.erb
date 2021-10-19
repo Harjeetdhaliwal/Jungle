@@ -49,7 +49,7 @@
         </li>
         <% if current_user %>
           <li style="padding-top:15px;">
-            Signed in as <%= current_user.name %>
+            Signed in as <%= current_user.name %> <%= current_user.last_name %>
             </li>
             <li>
               <%= link_to 'Logout', '/logout' %>
